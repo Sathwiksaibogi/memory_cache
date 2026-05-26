@@ -19,10 +19,28 @@ impl<T> InmemoryCache<T>{
 
     pub fn set(&mut self,key:String,val:T,ttl:Duration){
 
+        let expiry=Instant::now() + ttl;
+        let cacheitem=CacheItem{
+            data:val,
+            expiry,
+        };
+        self.store.insert(key,cacheitem );
     }
 
     pub fn get(&self,key:&str)->Option<&T>{
+        match self.store.get(key){
+            Some(item)=>{
+                if Instant::now()>=item.expiry{
+                    None
+                } else{
+                    Some(&item.data)
+                }
 
-        None
+            }
+
+            None=>{
+                None
+            }
+        }
     }
 }
