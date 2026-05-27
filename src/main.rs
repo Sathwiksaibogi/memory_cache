@@ -8,6 +8,7 @@ fn main() {
    // let mut locked_cache=cache.lock().unwrap();   it will make the cache to be safe i.e lock till the end even when its sleep AND blocks the other threads completely.
 //    so directly use the .lock() method while calling the fn , in this way when the scope ends it gets unlock and make avail for other threads
     
+    let cache_clone=Arc::clone(&cache);
     println!("inserting item with 2 sec ttl");
     cache.lock().unwrap().set(String::from("sathwik"), String::from("sathwik"), Duration::from_secs(2));
     match cache.lock().unwrap().get("sathwik"){

@@ -43,4 +43,15 @@ impl<T> InmemoryCache<T>{
             }
         }
     }
+    pub fn cleanup(&mut self){
+        let mut deadkeys=Vec::new();
+        for (key,item) in self.store.iter(){
+            if Instant::now() >= item.expiry {
+                deadkeys.push(key.clone());
+            }
+        }
+        for key in deadkeys{
+            self.store.remove(&key);
+        }
+    }
 }
