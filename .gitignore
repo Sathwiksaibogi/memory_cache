@@ -1,0 +1,12 @@
+# Block the massive compiled binaries folder
+/target
+
+# Ignore local IDE settings (VS Code)
+.vscode/
+
+# Ignore any local environment variable files
+.env
+
+# Ignore operating system garbage files
+.DS_Store
+Thumbs.db

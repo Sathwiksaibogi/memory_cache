@@ -1,0 +1,7 @@
+# Ignore the Makefile from language statistics
+Makefile linguist-documentation=true
+
+# Ignore standard documentation folders or text logs if you add them later
+docs/* linguist-documentation=true
+*.log linguist-vendored=true
+*.txt linguist-vendored=true
